@@ -328,14 +328,14 @@ mod tests {
 
     use crate::{ConstChoice, I128, U128};
 
-    #[cfg(target_pointer_width = "64")]
+    #[cfg(feature = "u64")]
     #[test]
     fn as_words() {
         let n = I128::from_be_hex("AAAAAAAABBBBBBBBCCCCCCCCDDDDDDDD");
         assert_eq!(n.as_words(), &[0xCCCCCCCCDDDDDDDD, 0xAAAAAAAABBBBBBBB]);
     }
 
-    #[cfg(target_pointer_width = "64")]
+    #[cfg(feature = "u64")]
     #[test]
     fn as_words_mut() {
         let mut n = I128::from_be_hex("AAAAAAAABBBBBBBBCCCCCCCCDDDDDDDD");

@@ -11,7 +11,7 @@ macro_rules! nlimbs {
 
 #[cfg(test)]
 mod tests {
-    #[cfg(target_pointer_width = "32")]
+    #[cfg(not(feature = "u64"))]
     #[test]
     fn nlimbs_for_bits_macro() {
         assert_eq!(nlimbs!(64), 2);
@@ -20,7 +20,7 @@ mod tests {
         assert_eq!(nlimbs!(256), 8);
     }
 
-    #[cfg(target_pointer_width = "64")]
+    #[cfg(feature = "u64")]
     #[test]
     fn nlimbs_for_bits_macro() {
         assert_eq!(nlimbs!(64), 1);

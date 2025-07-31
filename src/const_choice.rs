@@ -25,13 +25,13 @@ impl ConstChoice {
     }
 
     #[inline]
-    #[cfg(target_pointer_width = "32")]
+    #[cfg(not(feature = "u64"))]
     pub(crate) const fn as_u64_mask(&self) -> u64 {
         ((self.0 as u64) << 32) | (self.0 as u64)
     }
 
     #[inline]
-    #[cfg(target_pointer_width = "64")]
+    #[cfg(feature = "u64")]
     pub(crate) const fn as_u64_mask(&self) -> u64 {
         self.0
     }

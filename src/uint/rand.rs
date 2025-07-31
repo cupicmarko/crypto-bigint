@@ -128,9 +128,9 @@ pub(super) fn random_mod_core<T, R: TryRngCore + ?Sized>(
 where
     T: AsMut<[Limb]> + AsRef<[Limb]> + ConstantTimeLess + Zero,
 {
-    #[cfg(target_pointer_width = "64")]
+    #[cfg(feature = "u64")]
     let mut next_word = || rng.try_next_u64();
-    #[cfg(target_pointer_width = "32")]
+    #[cfg(not(feature = "u64"))]
     let mut next_word = || rng.try_next_u32();
 
     let n_limbs = n_bits.div_ceil(Limb::BITS) as usize;

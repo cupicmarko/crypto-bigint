@@ -387,7 +387,7 @@ const fn iterations(bits: u32) -> u32 {
 
 #[inline(always)]
 const fn lowest_u64(words: &[Word]) -> u64 {
-    #[cfg(target_pointer_width = "32")]
+    #[cfg(not(feature = "u64"))]
     {
         debug_assert!(words.len() >= 1);
         let mut ret = words[0] as u64;
@@ -399,7 +399,7 @@ const fn lowest_u64(words: &[Word]) -> u64 {
         ret
     }
 
-    #[cfg(target_pointer_width = "64")]
+    #[cfg(feature = "u64")]
     {
         words[0]
     }

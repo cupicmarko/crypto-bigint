@@ -14,7 +14,6 @@ keywords = ["arbitrary", "crypto", "bignum", "integer", "precision"]
 readme = "README.md"
 resolver = "2"
 edition = "2024"
-rust-version = "1.85"
 
 [dependencies]
 subtle = { version = "2.6", default-features = false }
@@ -40,12 +39,13 @@ rand_core = { version = "0.9", features = ["std", "os_rng"] }
 rand_chacha = "0.9"
 
 [features]
-default = ["rand"]
+default = ["rand", "u64"]
 alloc = ["serdect?/alloc"]
-
+feature = ["u64"]
 extra-sizes = []
 rand = ["rand_core"]
 serde = ["dep:serdect"]
+u64 = []
 
 [package.metadata.docs.rs]
 all-features = true

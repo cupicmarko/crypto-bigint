@@ -7,9 +7,9 @@ use subtle::ConstantTimeLess;
 
 impl Random for Limb {
     fn try_random<R: TryRngCore + ?Sized>(rng: &mut R) -> Result<Self, R::Error> {
-        #[cfg(target_pointer_width = "32")]
+        #[cfg(not(feature = "u64"))]
         let val = rng.try_next_u32()?;
-        #[cfg(target_pointer_width = "64")]
+        #[cfg(feature = "u64")]
         let val = rng.try_next_u64()?;
 
         Ok(Self(val))

@@ -796,14 +796,14 @@ mod tests {
     #[cfg(feature = "alloc")]
     use {super::radix_encode_limbs_to_string, alloc::format};
 
-    #[cfg(target_pointer_width = "32")]
+    #[cfg(not(feature = "u64"))]
     use crate::U64 as UintEx;
 
-    #[cfg(target_pointer_width = "64")]
+    #[cfg(feature = "u64")]
     use crate::U128 as UintEx;
 
     #[test]
-    #[cfg(target_pointer_width = "32")]
+    #[cfg(not(feature = "u64"))]
     fn from_be_slice() {
         let bytes = hex!("0011223344556677");
         let n = UintEx::from_be_slice(&bytes);
@@ -811,7 +811,7 @@ mod tests {
     }
 
     #[test]
-    #[cfg(target_pointer_width = "64")]
+    #[cfg(feature = "u64")]
     fn from_be_slice() {
         let bytes = hex!("00112233445566778899aabbccddeeff");
         let n = UintEx::from_be_slice(&bytes);
@@ -822,7 +822,7 @@ mod tests {
     }
 
     #[test]
-    #[cfg(target_pointer_width = "32")]
+    #[cfg(not(feature = "u64"))]
     fn from_le_slice() {
         let bytes = hex!("7766554433221100");
         let n = UintEx::from_le_slice(&bytes);
@@ -830,7 +830,7 @@ mod tests {
     }
 
     #[test]
-    #[cfg(target_pointer_width = "64")]
+    #[cfg(feature = "u64")]
     fn from_le_slice() {
         let bytes = hex!("ffeeddccbbaa99887766554433221100");
         let n = UintEx::from_le_slice(&bytes);
@@ -841,14 +841,14 @@ mod tests {
     }
 
     #[test]
-    #[cfg(target_pointer_width = "32")]
+    #[cfg(not(feature = "u64"))]
     fn from_be_hex() {
         let n = UintEx::from_be_hex("0011223344556677");
         assert_eq!(n.as_limbs(), &[Limb(0x44556677), Limb(0x00112233)]);
     }
 
     #[test]
-    #[cfg(target_pointer_width = "64")]
+    #[cfg(feature = "u64")]
     fn from_be_hex() {
         let n = UintEx::from_be_hex("00112233445566778899aabbccddeeff");
         assert_eq!(
@@ -858,14 +858,14 @@ mod tests {
     }
 
     #[test]
-    #[cfg(target_pointer_width = "32")]
+    #[cfg(not(feature = "u64"))]
     fn from_le_hex() {
         let n = UintEx::from_le_hex("7766554433221100");
         assert_eq!(n.as_limbs(), &[Limb(0x44556677), Limb(0x00112233)]);
     }
 
     #[test]
-    #[cfg(target_pointer_width = "64")]
+    #[cfg(feature = "u64")]
     fn from_le_hex() {
         let n = UintEx::from_le_hex("ffeeddccbbaa99887766554433221100");
         assert_eq!(
@@ -1039,7 +1039,7 @@ mod tests {
     }
 
     #[test]
-    #[cfg(target_pointer_width = "32")]
+    #[cfg(not(feature = "u64"))]
     fn encode_be_hex() {
         let n = UintEx::from_be_hex("0011223344556677");
 
@@ -1051,7 +1051,7 @@ mod tests {
     }
 
     #[test]
-    #[cfg(target_pointer_width = "64")]
+    #[cfg(feature = "u64")]
     fn encode_be_hex() {
         let n = UintEx::from_be_hex("00112233445566778899aabbccddeeff");
 

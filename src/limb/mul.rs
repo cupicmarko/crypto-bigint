@@ -129,14 +129,14 @@ mod tests {
     use super::{CheckedMul, Limb};
 
     #[test]
-    #[cfg(target_pointer_width = "32")]
+    #[cfg(not(feature = "u64"))]
     fn checked_mul_ok() {
         let n = Limb::from_u16(0xffff);
         assert_eq!(n.checked_mul(&n).unwrap(), Limb::from_u32(0xfffe_0001));
     }
 
     #[test]
-    #[cfg(target_pointer_width = "64")]
+    #[cfg(feature = "u64")]
     fn checked_mul_ok() {
         let n = Limb::from_u32(0xffff_ffff);
         assert_eq!(
